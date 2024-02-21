@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import Http404
-posts = [
+
+
+posts: list[dict] = [
     {
         'id': 0,
         'location': 'Остров отчаянья',
@@ -43,20 +45,20 @@ posts = [
     },
 ]
 
-post_dict = {post['id']: post for post in posts}
+CHECK_DICT: dict = {post['id']: post for post in posts}
 
 
 def index(request):
     template = 'blog/index.html'
-    context = {'posts': posts[::-1]}
+    context = {'post_list': posts[::-1]}
     return render(request, template, context)
 
 
-def post_detail(request, id):
-    if id not in post_dict:
+def post_detail(request, post_id):
+    if post_id not in CHECK_DICT:
         raise Http404('Вы ввели неверный id')
     template = 'blog/detail.html'
-    context = {'post': post_dict[id]}
+    context = {'post': CHECK_DICT[post_id]}
     return render(request, template, context)
 
 
