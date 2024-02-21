@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import Http404
 posts = [
     {
-        'post_id': 0,
+        'id': 0,
         'location': 'Остров отчаянья',
         'date': '30 сентября 1659 года',
         'category': 'travel',
@@ -14,7 +14,7 @@ posts = [
                 который назвал островом Отчаяния.''',
     },
     {
-        'post_id': 1,
+        'id': 1,
         'location': 'Остров отчаянья',
         'date': '1 октября 1659 года',
         'category': 'not-my-day',
@@ -30,7 +30,7 @@ posts = [
                 гиблого места.''',
     },
     {
-        'post_id': 2,
+        'id': 2,
         'location': 'Остров отчаянья',
         'date': '25 октября 1659 года',
         'category': 'not-my-day',
@@ -43,7 +43,7 @@ posts = [
     },
 ]
 
-post_dict = {post['post_id']: post for post in posts}
+post_dict = {post['id']: post for post in posts}
 
 
 def index(request):
@@ -52,11 +52,11 @@ def index(request):
     return render(request, template, context)
 
 
-def post_detail(request, post_id):
-    if post_id not in post_dict:
+def post_detail(request, id):
+    if id not in post_dict:
         raise Http404('Вы ввели неверный id')
     template = 'blog/detail.html'
-    context = {'post': post_dict[post_id]}
+    context = {'post': post_dict[id]}
     return render(request, template, context)
 
 
