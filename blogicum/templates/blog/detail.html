@@ -3,19 +3,21 @@
   {{ post.location }}. {{ post.date }}
 {% endblock %}
 {% block content %}
-  <ul>
-    <li>
-      Место: {{ post.location }}
-    </li>
-    <li>
-      Дата: {{ post.date }}
-    </li>
-    <li>
-      Категория: <a href="{% url 'blog:category_posts' post.category %}">
-      {{ post.category }}</a>
-    </li>
-  </ul>
-  <p>
-    {{ post.text|linebreaks }}
-  </p>          
+  <article>
+    <ul>
+      <li>
+        Место: {{ post.location }}
+      </li>
+      <li>
+        Дата: {{ post.date }}
+      </li>
+      <li>
+        Категория: <a href="{% url 'blog:category_posts' post.category %}">
+        {{ post.category }}</a>
+      </li>
+    </ul>
+    <p>
+      {{ post.text|linebreaks }}
+    </p>
+  </article>
 {% endblock %}

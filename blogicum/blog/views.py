@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import Http404
 posts = [
     {
-        'id': 0,
+        'post_id': 0,
         'location': 'Остров отчаянья',
         'date': '30 сентября 1659 года',
         'category': 'travel',
@@ -14,7 +14,7 @@ posts = [
                 который назвал островом Отчаяния.''',
     },
     {
-        'id': 1,
+        'post_id': 1,
         'location': 'Остров отчаянья',
         'date': '1 октября 1659 года',
         'category': 'not-my-day',
@@ -30,7 +30,7 @@ posts = [
                 гиблого места.''',
     },
     {
-        'id': 2,
+        'post_id': 2,
         'location': 'Остров отчаянья',
         'date': '25 октября 1659 года',
         'category': 'not-my-day',
@@ -43,21 +43,24 @@ posts = [
     },
 ]
 
-post_dict = {post['id']: post for post in posts}
+post_dict = {post['post_id']: post for post in posts}
 
 
 def index(request):
+    template = 'blog/index.html'
     context = {'posts': posts[::-1]}
-    return render(request, 'blog/index.html', context)
+    return render(request, template, context)
 
 
-def post_detail(request, id):
-    if id not in post_dict:
+def post_detail(request, post_id):
+    if post_id not in post_dict:
         raise Http404('Вы ввели неверный id')
-    context = {'post': post_dict[id]}
-    return render(request, 'blog/detail.html', context)
+    template = 'blog/detail.html'
+    context = {'post': post_dict[post_id]}
+    return render(request, template, context)
 
 
 def category_posts(request, category_slug):
+    template = 'blog/category.html'
     context = {'posts_category': category_slug}
-    return render(request, 'blog/category.html', context)
+    return render(request, template, context)

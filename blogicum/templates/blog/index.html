@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}
   Лента записей
-{% endblock%}
+{% endblock %}
 {% block content %}
   <h1>Лента записей</h1>
   <hr>
@@ -22,8 +22,8 @@
       <p>
         {{ post.text|linebreaks|truncatewords:10 }}
       </p>
-      <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
+      <a href="{% url 'blog:post_detail' post.post_id %}">Читать полный текст</a>
     </article>
-  <hr>
+    <hr>
   {% endfor %}
 {% endblock %}
